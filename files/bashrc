@@ -5,3 +5,6 @@ alias rm='rm -r'
 alias ls='ls --color -F'
 alias lsd='ls -d *(/)'
 alias lsf='ls -h *(.)'
+
+export NVM_DIR="/home/uxbox/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

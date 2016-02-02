@@ -5,7 +5,7 @@
 Build the image
 
 ```bash
-sudo docker build --rm=true -t uxbox . 
+sudo docker build --rm=true -t uxbox .
 ```
 
 Start development environment inside docker:

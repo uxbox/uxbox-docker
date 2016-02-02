@@ -28,6 +28,8 @@ COPY files/lein /home/uxbox/.local/bin/lein
 
 RUN echo "uxbox ALL=(ALL) ALL" >> /etc/sudoers
 RUN chmod +x /home/uxbox/.local/bin/lein
+RUN chown uxbox /home/uxbox/.bashrc
+RUN chown uxbox /home/uxbox/.vimrc
 
 # RUN /etc/init.d/postgresql start \
 #     && psql -U postgres -c "create user \"uxbox\" LOGIN SUPERUSER" \
@@ -36,7 +38,12 @@ RUN chmod +x /home/uxbox/.local/bin/lein
 
 USER uxbox
 WORKDIR /home/uxbox
+
 RUN bash -c "/home/uxbox/.local/bin/lein version"
+
+RUN git clone https://github.com/creationix/nvm.git .nvm
+RUN bash -c "source .nvm/nvm.sh && nvm install v5.4.1"
+RUN bash -c "source .nvm/nvm.sh && nvm alias default v5.4.1"
 
 EXPOSE 3449
 
