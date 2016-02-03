@@ -12,7 +12,7 @@ RUN apt-get update -yq && \
     apt-get install -yq postgresql-9.4 postgresql-client-9.4 bash git tmux vim
 
 RUN apt-get update -yq && \
-    apt-get install -yq openjdk-7-jdk rlwrap
+    apt-get install -yq openjdk-7-jdk rlwrap build-essential
 
 RUN mkdir -p /etc/resolvconf/resolv.conf.d
 RUN echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/tail
