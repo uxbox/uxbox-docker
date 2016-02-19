@@ -42,8 +42,7 @@ WORKDIR /home/uxbox
 RUN bash -c "/home/uxbox/.local/bin/lein version"
 
 RUN git clone https://github.com/creationix/nvm.git .nvm
-RUN bash -c "source .nvm/nvm.sh && nvm install v5.4.1"
-RUN bash -c "source .nvm/nvm.sh && nvm alias default v5.4.1"
+RUN bash -c "source .nvm/nvm.sh && nvm install v5.6.0"
+RUN bash -c "source .nvm/nvm.sh && nvm alias default v5.6.0"
 
 EXPOSE 3449
-
