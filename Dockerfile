@@ -19,16 +19,8 @@ RUN echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/tail
 RUN useradd -m -g users -s /bin/bash uxbox
 RUN echo "uxbox:uxbox" | chpasswd
 
-COPY files/bashrc /home/uxbox/.bashrc
-COPY files/vimrc /home/uxbox/.vimrc
-COPY files/pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf
-COPY files/lein /home/uxbox/.local/bin/lein
-# COPY files/start.sh /home/uxbox/
-
 RUN echo "uxbox ALL=(ALL) ALL" >> /etc/sudoers
-RUN chmod +x /home/uxbox/.local/bin/lein
-RUN chown uxbox /home/uxbox/.bashrc
-RUN chown uxbox /home/uxbox/.vimrc
+COPY files/pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf
 
 # RUN /etc/init.d/postgresql start \
 #     && psql -U postgres -c "create user \"uxbox\" LOGIN SUPERUSER" \
@@ -38,10 +30,19 @@ RUN chown uxbox /home/uxbox/.vimrc
 USER uxbox
 WORKDIR /home/uxbox
 
+RUN git clone https://github.com/creationix/nvm.git .nvm
+RUN bash -c "source .nvm/nvm.sh && nvm install v5.7.0"
+RUN bash -c "source .nvm/nvm.sh && nvm alias default v5.7.0"
+
+COPY files/lein /home/uxbox/.local/bin/lein
 RUN bash -c "/home/uxbox/.local/bin/lein version"
 
-RUN git clone https://github.com/creationix/nvm.git .nvm
-RUN bash -c "source .nvm/nvm.sh && nvm install v5.6.0"
-RUN bash -c "source .nvm/nvm.sh && nvm alias default v5.6.0"
+COPY files/bashrc /home/uxbox/.bashrc
+COPY files/vimrc /home/uxbox/.vimrc
+
+COPY files/start.sh /home/uxbox/.local/bin/start.sh
 
 EXPOSE 3449
+EXPOSE 5050
+
+CMD /home/uxbox/.local/bin/start.sh
