@@ -23,7 +23,5 @@ sudo docker run -ti \
      -v `pwd`/uxbox:/home/uxbox/uxbox  \
      -v `pwd`/uxbox-backend:/home/uxbox/uxbox-backend \
      -v $HOME/.m2:/home/uxbox/.m2 \
-     -v $HOME/.lein:/home/uxbox/.lein \
      -v $HOME/.gitconfig:/home/uxbox/.gitconfig \
      -p 3449:3449 -p 5050:5050 uxbox:$REV
-
