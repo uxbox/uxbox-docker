@@ -29,6 +29,7 @@ COPY files/pg_hba.conf /etc/postgresql/9.5/main/pg_hba.conf
 RUN /etc/init.d/postgresql start \
     && psql -U postgres -c "create user \"uxbox\" LOGIN SUPERUSER" \
     && createdb -U uxbox uxbox \
+    && createdb -U uxbox test \
     && /etc/init.d/postgresql stop
 
 USER uxbox
