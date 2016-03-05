@@ -9,9 +9,13 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 RUN echo "deb http://httpredir.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" >> /etc/apt/sources.list
+
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
 RUN apt-get update -yq && \
-    apt-get install -yq bash git tmux vim openjdk-8-jdk rlwrap build-essential
+    apt-get install -yq bash git tmux vim openjdk-8-jdk rlwrap build-essential \
+                        postgresql-9.5 postgresql-contrib-9.5
 
 RUN mkdir -p /etc/resolvconf/resolv.conf.d
 RUN echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/tail
@@ -20,12 +24,12 @@ RUN useradd -m -g users -s /bin/bash uxbox
 RUN echo "uxbox:uxbox" | chpasswd
 
 RUN echo "uxbox ALL=(ALL) ALL" >> /etc/sudoers
-COPY files/pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf
+COPY files/pg_hba.conf /etc/postgresql/9.5/main/pg_hba.conf
 
-# RUN /etc/init.d/postgresql start \
-#     && psql -U postgres -c "create user \"uxbox\" LOGIN SUPERUSER" \
-#     && createdb -U uxbox uxbox \
-#     && /etc/init.d/postgresql stop
+RUN /etc/init.d/postgresql start \
+    && psql -U postgres -c "create user \"uxbox\" LOGIN SUPERUSER" \
+    && createdb -U uxbox uxbox \
+    && /etc/init.d/postgresql stop
 
 USER uxbox
 WORKDIR /home/uxbox
@@ -40,9 +44,13 @@ RUN bash -c "/home/uxbox/.local/bin/lein version"
 COPY files/bashrc /home/uxbox/.bashrc
 COPY files/vimrc /home/uxbox/.vimrc
 
-COPY files/start.sh /home/uxbox/.local/bin/start.sh
-
+USER root
+WORKDIR /root
 EXPOSE 3449
 EXPOSE 5050
 
-CMD /home/uxbox/.local/bin/start.sh
+COPY files/bashrc /root/.bashrc
+COPY files/vimrc /root/.vimrc
+COPY files/start.sh /root/start.sh
+
+CMD /root/start.sh
