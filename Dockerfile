@@ -49,7 +49,7 @@ COPY files/vimrc /home/uxbox/.vimrc
 USER root
 WORKDIR /root
 EXPOSE 3449
-EXPOSE 5050
+EXPOSE 6060
 
 COPY files/bashrc /root/.bashrc
 COPY files/vimrc /root/.vimrc
