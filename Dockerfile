@@ -37,8 +37,8 @@ USER uxbox
 WORKDIR /home/uxbox
 
 RUN git clone https://github.com/creationix/nvm.git .nvm
-RUN bash -c "source .nvm/nvm.sh && nvm install v5.7.0"
-RUN bash -c "source .nvm/nvm.sh && nvm alias default v5.7.0"
+RUN bash -c "source .nvm/nvm.sh && nvm install v5.9.0"
+RUN bash -c "source .nvm/nvm.sh && nvm alias default v5.9.0"
 
 COPY files/lein /home/uxbox/.local/bin/lein
 RUN bash -c "/home/uxbox/.local/bin/lein version"
