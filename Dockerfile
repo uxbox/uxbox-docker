@@ -25,6 +25,7 @@ RUN echo "uxbox:uxbox" | chpasswd
 
 RUN echo "uxbox ALL=(ALL) ALL" >> /etc/sudoers
 COPY files/pg_hba.conf /etc/postgresql/9.5/main/pg_hba.conf
+COPY files/postgresql.conf /etc/postgresql/9.5/main/postgresql.conf
 
 RUN /etc/init.d/postgresql start \
     && psql -U postgres -c "create user \"uxbox\" LOGIN SUPERUSER" \
