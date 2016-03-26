@@ -50,6 +50,7 @@ USER root
 WORKDIR /root
 EXPOSE 3449
 EXPOSE 6060
+EXPOSE 9090
 
 COPY files/bashrc /root/.bashrc
 COPY files/vimrc /root/.vimrc
