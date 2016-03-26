@@ -24,4 +24,4 @@ sudo docker run -ti \
      -v `pwd`/uxbox-backend:/home/uxbox/uxbox-backend \
      -v $HOME/.m2:/home/uxbox/.m2 \
      -v $HOME/.gitconfig:/home/uxbox/.gitconfig \
-     -p 3449:3449 -p 6060:6060 -p 9090 uxbox:$REV
+     -p 3449:3449 -p 6060:6060 -p 9090:9090 uxbox:$REV
