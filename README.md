@@ -27,7 +27,7 @@ environment.**
 For start it, staying in this repository, execute:
 
 ```bash
-./start.sh
+./manage.sh run
 ```
 
 This will do the following:
