@@ -19,7 +19,7 @@ sudo apt-get install docker
 ```
 
 
-## Start the docker image ##
+## Start the docker container ##
 
 **Requires a minimum knowledge of tmux usage in order to use that development
 environment.**
