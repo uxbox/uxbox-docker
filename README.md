@@ -46,6 +46,44 @@ free to execute any commands and open many shells as you want.
 You can create a new shell just pressing the **Ctr+b c** shortcut. And **Ctrl+b w**
 for switch between windows, **Ctrl+b &** for kill the current window.
 
+## Inside the tmux session ##
+
+### UI ###
+
+The UI related tasks starts automatically so you do not need do anything. The
+**window 0** and **window 1** are used for the UI related environment.
+
+
+### Backend ###
+
+The backend related environment is located in the **window 2**, and you can go
+directly to it using `ctrl+b 2` shortcut. 
+
+By default this tasks are performed:
+
+- Start postgresql.
+- Load initial fixtures into the database.
+
+The backend is not started automatically, and frontend code by default does not
+requires that (because it uses a remote server on default config).
+
+You can start it just execting the `run.sh` script:
+
+```bash
+./scripts/run.sh
+```
+
+You also can start an repl and strart the backend inside of them:
+
+```bash
+lein repl
+```
+
+And use `(start)` to start all the environment, `(stop)` for stoping it and
+`(reset)` for restart with code reloading. If some exception is raised when
+code is reloaded, just use `(repl/refresh)` in order to finish correctly the
+code swaping and later use `(reset)` again.
+
 
 ## License ##
 
