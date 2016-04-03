@@ -81,7 +81,7 @@ lein repl
 
 And use `(start)` to start all the environment, `(stop)` for stoping it and
 `(reset)` for restart with code reloading. If some exception is raised when
-code is reloaded, just use `(repl/refresh)` in order to finish correctly the
+code is reloaded, just use `(refresh)` in order to finish correctly the
 code swaping and later use `(reset)` again.
 
 
