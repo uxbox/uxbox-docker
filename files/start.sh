@@ -6,7 +6,6 @@ tmux new-window -t uxbox:1 -n 'figwheel'
 tmux select-window -t uxbox:1
 tmux send-keys -t uxbox 'su - uxbox' C-m
 tmux send-keys -t uxbox 'cd uxbox' C-m
-tmux send-keys -t uxbox './scripts/build-worker' C-m
 tmux send-keys -t uxbox 'npm run figwheel' C-m
 
 tmux new-window -t uxbox:2 -n 'backend'
