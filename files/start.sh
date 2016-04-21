@@ -13,8 +13,8 @@ tmux select-window -t uxbox:2
 tmux send-keys -t uxbox 'pg_ctlcluster 9.5 main start' C-m
 tmux send-keys -t uxbox 'su - uxbox' C-m
 tmux send-keys -t uxbox 'cd uxbox-backend' C-m
-tmux send-keys -t uxbox './scripts/fixtures.sh' C-m
-tmux send-keys -t uxbox './scripts/run.sh' C-m
+tmux send-keys -t uxbox './scripts/fixtures.sh;' C-m
+tmux send-keys -t uxbox './scripts/run.sh;' C-m
 
 tmux rename-window -t uxbox:0 'gulp'
 tmux select-window -t uxbox:0
