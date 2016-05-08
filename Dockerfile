@@ -15,7 +15,7 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
 
 RUN apt-get update -yq && \
     apt-get install -yq bash git tmux vim openjdk-8-jdk rlwrap build-essential \
-                        postgresql-9.5 postgresql-contrib-9.5
+                        postgresql-9.5 postgresql-contrib-9.5 imagemagick webp
 
 RUN mkdir -p /etc/resolvconf/resolv.conf.d
 RUN echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/tail
