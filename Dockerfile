@@ -1,15 +1,15 @@
-FROM debian:jessie
+FROM ubuntu:xenial
 MAINTAINER Andrey Antukh <niwi@niwi.nz>
 
 RUN apt-get update && \
     apt-get install -yq locales ca-certificates wget sudo && \
-    rm -rf /var/lib/apt/lists/* && \
-    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+    rm -rf /var/lib/apt/lists/*
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+RUN locale-gen && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-RUN echo "deb http://httpredir.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" >> /etc/apt/sources.list
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" >> /etc/apt/sources.list
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
@@ -21,9 +21,9 @@ RUN mkdir -p /etc/resolvconf/resolv.conf.d
 RUN echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/tail
 
 RUN useradd -m -g users -s /bin/bash uxbox
-RUN echo "uxbox:uxbox" | chpasswd
+RUN passwd uxbox -d
+RUN echo "uxbox ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN echo "uxbox ALL=(ALL) ALL" >> /etc/sudoers
 COPY files/pg_hba.conf /etc/postgresql/9.5/main/pg_hba.conf
 COPY files/postgresql.conf /etc/postgresql/9.5/main/postgresql.conf
 
