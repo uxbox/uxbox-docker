@@ -11,7 +11,7 @@ function kill_container {
 
 function build_image {
     kill_container
-    sudo docker build --rm=true -t $IMGNAME:$REV .
+    sudo docker build --rm=true -t $IMGNAME:$REV docker/
 }
 
 function initialize {
