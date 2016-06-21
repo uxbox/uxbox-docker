@@ -52,5 +52,6 @@ RUN bash -c "/home/uxbox/.local/bin/lein version"
 COPY files/bashrc /home/uxbox/.bashrc
 COPY files/vimrc /home/uxbox/.vimrc
 COPY files/start.sh /home/uxbox/.start.sh
+COPY files/tmux.conf /home/uxbox/.tmux.conf
 
 CMD /home/uxbox/.start.sh
